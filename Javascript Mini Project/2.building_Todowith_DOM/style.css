@@ -1,0 +1,12 @@
+.div1{
+    margin: 2rem;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    background-color: burlywood;
+    margin: 1rem;
+    height: 5rem;
+    width: 5rem;
+}
