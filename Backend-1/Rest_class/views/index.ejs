@@ -9,13 +9,16 @@
 </head>
 <body>
     
-    <H1>Quora post</H1>
-    <%= for(post of posts){ %>
-       <div class="post">
-        <h3 class="user">@<%= post.username %></h3>
-        <h4 class="content"> <%= post.content %></h4>
-       </div>
+    <body>
+    <h1>Quora Posts</h1>
+        <% for (post of posts) { %>
+        <div class="post">
+            <h3 class="user">@<%= post.username %></h3>
+            <h4 class="content"><%= post.content %></h4>
+        </div>
     <% } %>
+
+</body>
     
 </body>
 </html>
