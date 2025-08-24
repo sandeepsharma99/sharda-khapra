@@ -26,7 +26,7 @@ let post = [
     }
 ];
 
-app.get("/posts",(req,res)=>{
+app.get("/post",(req,res)=>{
     res.render("index.ejs");
 })
 
@@ -36,3 +36,4 @@ app.listen(port,()=>{
 
 // comment
 // new comment
+//comment:1
