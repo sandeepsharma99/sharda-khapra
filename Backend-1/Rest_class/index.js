@@ -1,21 +1,37 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const path = require("path")
+const path = require("path");
 
+app.use(express.urlencoded({extended :true}));
 
-app.set("view engine", "ejs")
-app.set(express.static(path.join(__dirname,"public")));
+app.set("view engine","ejs")
 
-app.use(express.urlencoded({extended :"true"}))
+app.set("views",path.join(__dirname,"views"));
 
-app.get("/",(res,res)=>{
-    res.send("server responding well")
+app.use(express.static(path.join(__dirname,"public")));
+
+let post = [
+    {
+    username:"sandeep",
+    content:"I Love coding"
+    },
+    {
+    username:"ram",
+    content:"I Love cricket"
+    },
+    {
+    username:"laxman",
+    content:"I Love boxing"
+    }
+];
+
+app.get("/posts",(req,res)=>{
+    res.render("index.ejs");
 })
 
 app.listen(port,()=>{
     console.log("listening on port:3000");
-    
 })
 
 // comment
