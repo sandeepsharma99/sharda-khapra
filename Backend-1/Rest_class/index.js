@@ -30,14 +30,17 @@ app.get("/posts",(req,res)=>{
     res.render("index.ejs",{posts});
 })
 
+// *creating a form in  new.ejs file and getting*
+
 app.get("/posts/new",(req,res)=>{
     res.render("new.ejs");
 })
 
 app.post("/posts",(req,res)=>{
-    let { username , content } = req.body;
-    posts.push({username ,content})
-    res.send("post request working")
+    let { username , content } = req.body;  // req goes within body in post
+    posts.push({username ,content})   // pushing new object to posts array
+    // res.send("post request working")
+    res.redirect("/posts")
 })
 
 app.listen(port,()=>{
