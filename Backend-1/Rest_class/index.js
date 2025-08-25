@@ -46,11 +46,10 @@ app.get("/posts",(req,res)=>{
 //     res.redirect("/posts")
 // })
 
-app.get("/posts/:id",(req,res)=>{
+app.get("/posts/id",(req,res)=>{
     let { id } = req.params;
     // console.log( id); // See what you are sending
     let post = posts.find((p) => id === p.id);
-    console.log("found post",post);
     res.render("show.ejs");
 });
 
