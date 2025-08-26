@@ -2,28 +2,26 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const path = require("path");
+const { v4: uuidv4 } = require('uuid');
 
 app.use(express.urlencoded({extended :true}));
-
 app.set("view engine","ejs")
-
 app.set("views",path.join(__dirname,"views"));
-
 app.use(express.static(path.join(__dirname,"public")));
 
 let posts = [
     {
-    id:"1a",
+    id:uuidv4(),
     username:"sandeep",
     content:"I Love coding"
     },
     {
-    id:"2b",
+    id:uuidv4(),
     username:"ram",
     content:"I Love cricket"
     },
     {
-    id:"3c",
+    id:uuidv4(),
     username:"laxman",
     content:"I Love boxing"
     },
@@ -39,32 +37,20 @@ app.get("/posts/new",(req,res)=>{
     res.render("new.ejs");
 })
 
-// app.post("/posts",(req,res)=>{
-//     let { username, content} = req.body;
-//     posts.push({username,content})
-//     // res.send("post req working")
-//     res.redirect("/posts");
-// })
 app.post("/posts",(req,res)=>{
     let { username , content } = req.body;  // req goes within body in post
-    posts.push({username ,content})   // pushing new object to posts array
+    let id = uuidv4();
+    posts.push({id,username ,content})   // pushing new object to posts array
     // res.send("post request working")
     res.redirect("/posts")
 })
 
 app.get("/posts/:id",(req,res)=>{
-    let {id} = req.params;
+    let id = req.params;
     let post = posts.find((pids)=> id === pids.id)
     // console.log(post);
-    res.render("show.ejs")
+    res.render("show.ejs",{post})
 })
-
-// app.get("/posts/id",(req,res)=>{
-//     let { id } = req.params;
-//     // console.log( id); // See what you are sending
-//     let post = posts.find((p) => id === p.id);
-//     res.render("show.ejs");
-// });
 
 app.listen(port,()=>{
     console.log("listening on port:3000");
