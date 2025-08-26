@@ -35,10 +35,16 @@ app.get("/posts",(req,res)=>{
 
 // *creating a form in  new.ejs file and getting*
 
-// app.get("/posts/new",(req,res)=>{
-//     res.render("new.ejs");
-// })
+app.get("/posts/new",(req,res)=>{
+    res.render("new.ejs");
+})
 
+app.post("/posts",(req,res)=>{
+    let { username, content} = req.body;
+    posts.push({username,content})
+    // res.send("post req working")
+    res.redirect("/posts");
+})
 // app.post("/posts",(req,res)=>{
 //     let { username , content } = req.body;  // req goes within body in post
 //     posts.push({username ,content})   // pushing new object to posts array
@@ -46,12 +52,12 @@ app.get("/posts",(req,res)=>{
 //     res.redirect("/posts")
 // })
 
-app.get("/posts/id",(req,res)=>{
-    let { id } = req.params;
-    // console.log( id); // See what you are sending
-    let post = posts.find((p) => id === p.id);
-    res.render("show.ejs");
-});
+// app.get("/posts/id",(req,res)=>{
+//     let { id } = req.params;
+//     // console.log( id); // See what you are sending
+//     let post = posts.find((p) => id === p.id);
+//     res.render("show.ejs");
+// });
 
 app.listen(port,()=>{
     console.log("listening on port:3000");
