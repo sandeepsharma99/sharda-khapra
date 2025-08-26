@@ -46,10 +46,26 @@ app.post("/posts",(req,res)=>{
 })
 
 app.get("/posts/:id",(req,res)=>{
-    let id = req.params;
-    let post = posts.find((pids)=> id === pids.id)
+    let {id} = req.params;
+    let post = posts.find((pids)=> id === pids.id);
     // console.log(post);
-    res.render("show.ejs",{post})
+    res.render("show.ejs",{post});
+})
+
+app.patch("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+    let newContent = req.body.content;
+    let post = posts.find((p)=> id === p.id);
+    post.content = newContent;
+    console.log(post);
+    
+    // let newContent = rq.body.content;
+    console.log(id);
+    res.send("patch request working");
+})
+
+app.get("/posts/:id/edit",(req,res)=>{
+    res.render("edit.ejs")
 })
 
 app.listen(port,()=>{
