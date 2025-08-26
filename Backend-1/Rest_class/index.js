@@ -39,18 +39,25 @@ app.get("/posts/new",(req,res)=>{
     res.render("new.ejs");
 })
 
-app.post("/posts",(req,res)=>{
-    let { username, content} = req.body;
-    posts.push({username,content})
-    // res.send("post req working")
-    res.redirect("/posts");
-})
 // app.post("/posts",(req,res)=>{
-//     let { username , content } = req.body;  // req goes within body in post
-//     posts.push({username ,content})   // pushing new object to posts array
-//     // res.send("post request working")
-//     res.redirect("/posts")
+//     let { username, content} = req.body;
+//     posts.push({username,content})
+//     // res.send("post req working")
+//     res.redirect("/posts");
 // })
+app.post("/posts",(req,res)=>{
+    let { username , content } = req.body;  // req goes within body in post
+    posts.push({username ,content})   // pushing new object to posts array
+    // res.send("post request working")
+    res.redirect("/posts")
+})
+
+app.get("/posts/:id",(req,res)=>{
+    let {id} = req.params;
+    let post = posts.find((pids)=> id === pids.id)
+    // console.log(post);
+    res.render("show.ejs")
+})
 
 // app.get("/posts/id",(req,res)=>{
 //     let { id } = req.params;
