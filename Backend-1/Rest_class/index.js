@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 
 app.use(express.urlencoded({extended :true}));
 app.use(methodOverride("_method"));
+
 app.set("view engine","ejs")
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
@@ -49,7 +50,9 @@ app.post("/posts",(req,res)=>{
 
 app.get("/posts/:id",(req,res)=>{
     let {id} = req.params;
-    let post = posts.find((pids)=> id === pids.id);
+    console.log(id);
+    
+    let post = posts.find((p)=> id === p.id);
     // console.log(post);
     res.render("show.ejs",{post});
 })
@@ -60,13 +63,20 @@ app.patch("/posts/:id",(req,res)=>{
     let post = posts.find((p)=> id === p.id);
     post.content = newContent;
     console.log(post);
-    // let newContent = rq.body.content;
-    console.log(id);
-    res.render("/posts");
+
+    res.redirect("/posts")
+})
+// <--!edit route-->
+app.get("/posts/:id/edit",(req,res)=>{
+    let {id} = req.params;
+    let post = posts.find((p)=>id === p.id);
+    res.render("edit.ejs", {post})
 })
 
-app.get("/posts/:id/edit",(req,res)=>{
-    res.render("edit.ejs")
+app.delete("/posts:id",(req,res)=>{
+    let {id} = req.params;
+    posts = posts.filter((p) => id !== p.id);
+    res.send("delete success");
 })
 
 app.listen(port,()=>{
