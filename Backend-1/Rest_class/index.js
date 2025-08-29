@@ -62,7 +62,7 @@ app.patch("/posts/:id",(req,res)=>{
     console.log(post);
     // let newContent = rq.body.content;
     console.log(id);
-    res.send("patch request working");
+    res.render("/posts");
 })
 
 app.get("/posts/:id/edit",(req,res)=>{
