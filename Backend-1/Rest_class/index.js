@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require("express"); // we use require to require get express 
 const app = express();
 const port = 3000;
 const path = require("path");
-const { v4: uuidv4 } = require('uuid');
-const methodOverride = require("method-override");
+const { v4: uuidv4 } = require('uuid'); //to generate random Id
+const methodOverride = require("method-override"); // it allow client http verb like to send put and delete Method in place of get and post (like form) .
 
-app.use(express.urlencoded({extended :true}));
+app.use(express.urlencoded({extended :true})); //it parses the incoming request bodies that are encoded in "application/x-www.urlencoded" format (The default format used by html form)
 app.use(methodOverride("_method"));
 
 app.set("view engine","ejs")
