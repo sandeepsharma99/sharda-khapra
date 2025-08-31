@@ -9,14 +9,15 @@ const connection = await mysql.createConnection({
   password:'India@12345678'
 });
 
+// to run conection
 try{
-    connection.query("SHOW TABLE",(err,result)=>{
-    if(err)throw err;
-    console.log(result);
-    });
-}catch(err){
-    console.log(err);
-}
+    const [rows] = await connection.query("SHOW TABLES");
+    console.log(rows);
+    }catch(err){
+        console.log(err);
+    }
+
+connection.end();
 
 let getRandomUser = () => {
   return {
