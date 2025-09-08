@@ -8,10 +8,13 @@ const connection = await mysql.createConnection({
   database: 'My_app',
   password:'India@12345678'
 });
+/* inserting new data */
+let q = "INSERT INTO user(id,username, email,password) VALUES (?,?,?,?)";
+let user = ["123","123_newuser","abc@gmail.com", "12abc"]
 
 // to run conection
 try{
-    const [rows] = await connection.query("SHOW TABLES");
+    const [rows] = await connection.query(q,user);
     console.log(rows);
     }catch(err){
         console.log(err);
