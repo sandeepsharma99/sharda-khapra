@@ -25,9 +25,12 @@ let getRandomUser = () => {
 app.get("/",(req,res)=>{
   let q = `select count(*) from user`;
   try{
-    const [rows] = await connection.query(q);
-    console.log(rows);
-    }catch(err){
+    connection.query(q,(err,result) =>{;
+    if (err) throw err;
+    console.log(result[0]["count(*)"]);
+    res.send("success");
+    });
+  }catch(err){
         console.log(err);
         res.send("some error in database")
     }
